@@ -1,0 +1,17 @@
+# Compiled binaries and objects
+*.exe
+*.o
+*.obj
+*.pdb
+*.out
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Temporary logs
+*.log
