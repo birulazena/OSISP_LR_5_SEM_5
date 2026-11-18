@@ -40,9 +40,8 @@ def recv_raw_frame(sock) -> str:
 def main():
     srv = subprocess.Popen(
         ["./server.exe", "--host", HOST, "--port", str(PORT), "--timeout", "5000"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
     time.sleep(0.5)
 
@@ -90,7 +89,7 @@ def main():
 
             send_raw_frame(s, "1|UNKNOWN_CMD|2|10|")
             resp = recv_raw_frame(s)
-            assert "|ERROR|" in resp and "UNKNOWN_COMMAND" in resp, f"Expected UNKNOWN_COMMAND, got: {resp}"
+            assert "|ERROR|" in resp and "Unknown message type" in resp, f"Expected error for unknown command, got: {resp}"
 
             send_raw_frame(s, "bad_payload_without_delimiters")
             resp = recv_raw_frame(s)

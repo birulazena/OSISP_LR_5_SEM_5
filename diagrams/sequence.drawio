@@ -1,0 +1,111 @@
+<mxGraphModel dx="1100" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="760">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <mxCell id="c1" value="Client 1 (id=1)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="60" y="30" width="140" height="680" as="geometry"/>
+    </mxCell>
+    <mxCell id="srv" value="Server (127.0.0.1:20016)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="340" y="30" width="160" height="680" as="geometry"/>
+    </mxCell>
+    <mxCell id="c2" value="Client 2 (id=2)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="640" y="30" width="140" height="680" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="note0" value="WSAStartup(), socket(), bind(), listen()" style="shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="320" y="95" width="200" height="36" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m1" value="1. connect() + LOGIN (senderId=1)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="160" as="sourcePoint"/>
+        <mxPoint x="420" y="160" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m2" value="2. OK (pending=0)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="195" as="sourcePoint"/>
+        <mxPoint x="130" y="195" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m3" value="3. connect() + LOGIN (senderId=2)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="710" y="230" as="sourcePoint"/>
+        <mxPoint x="420" y="230" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m4" value="4. OK (pending=0)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="265" as="sourcePoint"/>
+        <mxPoint x="710" y="265" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m5" value="5. LOGOUT (отключение адресата id=2)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="710" y="305" as="sourcePoint"/>
+        <mxPoint x="420" y="305" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m6" value="6. OK (bye) + closesocket()" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="340" as="sourcePoint"/>
+        <mxPoint x="710" y="340" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m7" value="7. SEND (target=2, msg 1..20)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="385" as="sourcePoint"/>
+        <mxPoint x="420" y="385" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m8" value="8. OK (status=QUEUED, queueSize=1..20)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="420" as="sourcePoint"/>
+        <mxPoint x="130" y="420" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m9" value="9. SEND (21-е сообщение, переполнение)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;strokeColor=#b85450;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="465" as="sourcePoint"/>
+        <mxPoint x="420" y="465" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m10" value="10. ERROR (QUEUE_FULL)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;strokeColor=#b85450;fontColor=#b85450;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="500" as="sourcePoint"/>
+        <mxPoint x="130" y="500" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m11" value="11. Повторный connect() + LOGIN + GET_PENDING" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="710" y="545" as="sourcePoint"/>
+        <mxPoint x="420" y="545" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m12" value="12. MSG x20 (порядок FIFO) + OK (count=20)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="580" as="sourcePoint"/>
+        <mxPoint x="710" y="580" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m13" value="13. ACK (count=20) + LOGOUT" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="710" y="620" as="sourcePoint"/>
+        <mxPoint x="420" y="620" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m14" value="14. OK (cleared=20) + bye" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="420" y="655" as="sourcePoint"/>
+        <mxPoint x="710" y="655" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>
