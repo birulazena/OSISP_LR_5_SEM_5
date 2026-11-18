@@ -80,6 +80,19 @@ bool setSocketTimeout(SOCKET sock, int timeoutMs) {
     return true;
 }
 
+LARGE_INTEGER qpcNow() {
+    LARGE_INTEGER t{};
+    QueryPerformanceCounter(&t);
+    return t;
+}
+
+double qpcDiffMs(LARGE_INTEGER start, LARGE_INTEGER end) {
+    LARGE_INTEGER freq{};
+    QueryPerformanceFrequency(&freq);
+    if (freq.QuadPart == 0) return 0.0;
+    return static_cast<double>(end.QuadPart - start.QuadPart) * 1000.0 / static_cast<double>(freq.QuadPart);
+}
+
 int sendAll(SOCKET sock, const char* data, int len) {
     int total = 0;
     while (total < len) {

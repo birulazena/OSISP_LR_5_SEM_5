@@ -15,8 +15,8 @@
 #include <string>
 
 constexpr const char* DEFAULT_HOST = "127.0.0.1";
-constexpr uint16_t DEFAULT_PORT = 20016; // 20000 + STUDENT_ID (16)
-constexpr int DEFAULT_SEED = 2552;       // 1000 + 16 * 97
+constexpr uint16_t DEFAULT_PORT = 20016; 
+constexpr int DEFAULT_SEED = 2552;
 constexpr uint32_t MAX_PAYLOAD_SIZE = 65536;
 
 bool initWinsock();
@@ -35,7 +35,9 @@ void logEvent(const std::string& role,
 std::string formatPeer(const sockaddr_in& addr);
 bool setSocketTimeout(SOCKET sock, int timeoutMs);
 
-// Возвращают: 1 = успех, 0 = штатное закрытие соединения, -1 = ошибка/тайм-аут
+LARGE_INTEGER qpcNow();
+double qpcDiffMs(LARGE_INTEGER start, LARGE_INTEGER end);
+
 int sendAll(SOCKET sock, const char* data, int len);
 int recvAll(SOCKET sock, char* data, int len);
 
